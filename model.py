@@ -17,6 +17,35 @@ class Account:
     with open(self.filepath, 'w') as f_object:
       json.dump(data, f_object, indent=2)
 
+  def deposit(self):
+      data = self.load()
+      amount = input("Enter the amount you'd like to deposit")
+      current_balance = float(data[self.account]["balance"])
+      current_balance += float(amount)
+      data[self.account]["balance"] = current_balance
+      self.save(data)
+
+  def withdraw(self):
+        data = self.load()
+        current_balance = float(data[self.account]["balance"])
+        withdrawl = float(input("How much would you like to withdraw? "))
+        if withdrawl > current_balance:
+            current_balance = current_balance
+            print("Error, you will overdraft your account!")
+        else:
+            current_balance -= withdrawl
+        data[self.account]["balance"] = current_balance
+        self.save(data)
+
+  def balance(self):
+      data = self.load()
+      current_balance = self.account["balance"]
+      print("Your account balance is: ", float(current_balance))
+      print("-----------------------------------------------")
+      print("_______________________________________________")
+
+
+
   def create_account(self):   #create account
     data = self.load()
     self.pin_num = input("Please enter a numerical pin number ")
@@ -54,34 +83,10 @@ class Account:
         elif option == '2':
             self.deposit()
         elif option == '3':
-            self.balance()
+            self.balance
         elif option == '4':
             return
 
-    def deposit(self):
-        data = self.load()
-        amount = input("Enter the amount you'd like to deposit")
-        current_balance = float(data[self.account]["balance"])
-        current_balance += float(amount)
-        data[self.account]["balance"] = current_balance
-        self.save(data)
-    
-    def withdraw(self):
-        current_balance = float(data[self.account]["balance"])
-        withdrawl = float(input("How much would you like to withdraw? "))
-        if withdrawl > current_balance:
-            current_balance = current_balance
-            print("Error, you will overdraft your account!")
-        else:
-            current_balance -= withdrawl
-        data[self.account]["balance"] = current_balance
-        self.save(data)
-
-    def balance(self):
-        current_balance = data[self.account]["balance"]
-        print("Your account balance is: ", float(current_balance))
-        print("-----------------------------------------------")
-        print("_______________________________________________")
-
+  
 
     
