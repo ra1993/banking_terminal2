@@ -58,13 +58,13 @@ class Account:
         elif option == '4':
             return
 
-    # def deposit(self):
-    #     data = self.load()
-    #     amount = input("Enter the amount you'd like to deposit")
-    #     current_balance = float(data[self.account]["balance"])
-    #     current_balance += float(amount)
-    #     data[self.account]["balance"] = current_balance
-    #     self.save(data)
+    def deposit(self):
+        data = self.load()
+        amount = input("Enter the amount you'd like to deposit")
+        current_balance = float(data[self.account]["balance"])
+        current_balance += float(amount)
+        data[self.account]["balance"] = current_balance
+        self.save(data)
     
     def withdraw(self):
         current_balance = float(data[self.account]["balance"])
